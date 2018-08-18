@@ -14,7 +14,6 @@ var getalltastdetails = function(req,res){
     }) 
 }
 var createtaskdetails = function(req,res){
-    console.log("***************", req.body)
     var task = new Task({ 
         title : req.body.title,
         description : req.body.description,
