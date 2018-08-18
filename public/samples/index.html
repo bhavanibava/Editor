@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Editor Sample</title>
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+	<script src="./bootstrap/js/jquery.min.js"></script>
+	<script src="../ckeditor.js"></script>
+	<script src="./js/sample.js"></script>
+	<link rel="stylesheet" href="./css/samples.css">
+	<link rel="stylesheet" href="./toolbarconfigurator/lib/codemirror/neo.css">
+</head>
+<body>
+	<div class="adjoined-bottom">
+		<div class="grid-container">
+			<div class="grid-width-100">
+				<!-- <form action="/get" method="GET"> -->
+					<div id="div1">
+						<input id="titleText" type="text" placeholder="Title"><br>
+					</div>
+					<div id="editor">
+						<input id="descriptionText" type="text" placeholder="description">
+					</div>
+					<button class="btn" id="saveButton">Save</button>
+					<!-- <p id="p1">Given Data's are : </p> -->
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		initSample();
+		jQuery(document).ready(function(){
+			jQuery("#saveButton").click(function(){
+				var editorHtmlData = CKEDITOR.instances['editor'].getData();
+				var editorValue = editorHtmlData.replace('<p>','');
+				editorValue = editorValue.replace('</p>\n','');
+				alert("editor html data : "+editorValue);
+				jQuery.ajax({
+                        url : '/',
+                        method : 'post',
+						dataType : 'json',
+						data : JSON.stringify({
+							title : jQuery("#titleText").val(),
+							description : editorValue
+						}),
+						// headers: {
+        				// 	'Content-Type': 'application/json',
+    					// },
+                        contentType : 'application/json; charset=utf-8',
+                        success : function(data){
+                            alert("successfully created"+data);
+                        } 
+                });
+			})
+		})
+	</script>
+</body>
+</html>
