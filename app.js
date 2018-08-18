@@ -1,0 +1,20 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
+var logger = require('morgan');
+var app = express();
+// var task = require('./routes/task');
+var index = require('./routes/index');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use('/task',task);
+app.use('/',index);
+app.use(express.static(path.join(__dirname,'public')));
+app.use(logger('dev'));
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
+var db = require('./db/index');
+module.exports = app;
