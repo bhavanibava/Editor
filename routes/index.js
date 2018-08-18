@@ -4,7 +4,7 @@ var task = require('../src/resource/task-operations');
 router.get('/', function(req, res, next) {
     console.log('index file running');
 	res.writeHead(302, {
-	  'Location': '/editor/samples/index.html'
+	  'Location': '/samples/index.html'
 	});
 	res.end();
 });
@@ -12,7 +12,7 @@ router.get('/get',function(req,res,next){
 	task.getalltastdetails(req,res);
 });
 router.post('/',function(req,res){
-	console.log("&&&&&&&&&&&&&&&&&&&&")
+// 	console.log("&&&&&&&&&&&&&&&&&&&&")
 	task.createtaskdetails(req,res);
 })
 module.exports = router;
