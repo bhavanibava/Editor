@@ -43,12 +43,9 @@
 							title : jQuery("#titleText").val(),
 							description : editorValue
 						}),
-						// headers: {
-        				// 	'Content-Type': 'application/json',
-    					// },
                         contentType : 'application/json; charset=utf-8',
                         success : function(data){
-                            alert("successfully created"+data);
+                            alert("successfully created");
                         } 
                 });
 			})
